@@ -53,6 +53,34 @@ npm start
 
 部署后，您将获得一个Smithery.ai提供的URL，可以在Cursor中使用该URL访问您的MCP服务。
 
+### Smithery部署配置文件
+
+本项目包含以下Smithery部署所需的配置文件：
+
+#### Dockerfile
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["node", "src/index.js"]
+```
+
+#### smithery.yaml
+
+```yaml
+command:
+  function: node src/index.js
+```
+
+这些配置文件是Smithery.ai平台部署所必需的，它们定义了如何构建和运行MCP服务。
+
 ## 在 Cursor 中使用
 
 ### 添加 MCP 服务器
