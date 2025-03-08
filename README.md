@@ -182,3 +182,21 @@ LLM 应该会识别这些指令并调用相应的 MCP 工具。
 
 - **2024-03-08**: 修复了JSON解析错误，优化了日志记录，简化了代码结构
 - **版本**: 1.0.0
+
+## Smithery 部署状态
+
+[![smithery badge](https://smithery.ai/badge/@Ceeon/find-a-mcp)](https://smithery.ai/server/@Ceeon/find-a-mcp)
+
+上面的徽章显示了当前 MCP 服务在 Smithery.ai 上的部署状态。如果您在 Smithery.ai 上部署时遇到 JavaScript 错误，可能是由以下原因导致：
+
+1. **JavaScript 兼容性问题**：Smithery.ai 网站可能使用了较新的 JavaScript 特性，与您的浏览器不兼容
+2. **网络连接问题**：部署过程中网络连接不稳定
+3. **Smithery.ai 平台临时故障**：平台可能正在维护或遇到技术问题
+
+### 解决方法
+
+1. 尝试使用不同的浏览器（如 Chrome 或 Firefox 的最新版本）
+2. 清除浏览器缓存后重试
+3. 检查网络连接是否稳定
+4. 稍后再尝试部署
+5. 如果问题持续存在，可以联系 Smithery.ai 的支持团队

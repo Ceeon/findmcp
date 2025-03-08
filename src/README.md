@@ -64,6 +64,32 @@ src/
 
 注意：Cursor 仅支持 MCP 的工具功能，不支持资源、提示模板等其他功能。
 
+## Smithery.ai 部署说明
+
+在 Smithery.ai 上部署本 MCP 服务时，需要注意以下几点：
+
+1. **配置文件**：
+   - 项目根目录已包含 `smithery.yaml` 和 `Dockerfile` 文件
+   - 这些文件定义了如何在 Smithery.ai 上构建和运行服务
+
+2. **部署步骤**：
+   - 确保代码已推送到 GitHub 仓库
+   - 访问 https://smithery.ai/new
+   - 选择您的 GitHub 仓库
+   - 点击"Deploy"按钮
+   - 等待部署完成
+
+3. **使用部署后的服务**：
+   - 部署成功后，您将获得一个 Smithery.ai URL
+   - 在 Cursor 中添加此 URL 作为 MCP 服务器
+   - 类型选择"url"而不是"command"
+
+4. **故障排除**：
+   - 如果部署过程中遇到 JavaScript 错误，可能是浏览器兼容性问题
+   - 尝试使用不同的浏览器或清除浏览器缓存
+   - 检查网络连接是否稳定
+   - 如果问题持续存在，可以联系 Smithery.ai 的支持团队
+
 ## 最近修复
 
 最近修复了以下问题：
@@ -81,4 +107,12 @@ src/
    - 简化了项目结构，只保留必要的文件
    - 直接在工具中返回固定文本，不依赖外部数据
 
-这些修复和优化确保了MCP服务器能够正确地与Cursor通信，并且代码结构更加简洁明了。 
+这些修复和优化确保了MCP服务器能够正确地与Cursor通信，并且代码结构更加简洁明了。
+
+## 部署状态
+
+当前服务已成功部署到 Smithery.ai：
+
+[![smithery badge](https://smithery.ai/badge/@Ceeon/find-a-mcp)](https://smithery.ai/server/@Ceeon/find-a-mcp)
+
+最后更新：2024-03-08 
