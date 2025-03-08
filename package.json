@@ -1,24 +1,36 @@
 {
-  "name": "mcp-search-server",
+  "name": "smithery-search-mcp",
   "version": "1.0.0",
-  "description": "一个基于Model Context Protocol的搜索服务器",
+  "description": "MCP服务，提供Smithery.ai网址查询功能",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "mcp",
     "search",
-    "model-context-protocol"
+    "model-context-protocol",
+    "cursor",
+    "smithery",
+    "service-discovery"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.4.1",
-    "axios": "^1.6.2",
-    "dotenv": "^16.3.1",
+    "@modelcontextprotocol/sdk": "^1.5.0",
     "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smithery-search-mcp.git"
   }
 }
