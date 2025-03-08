@@ -1,0 +1,7 @@
+{
+  "name": "FindMCP",
+  "description": "提供MCP服务目录信息的简单MCP服务器",
+  "version": "1.0.0",
+  "type": "stdio",
+  "command": "node src/index.js"
+} 
