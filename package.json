@@ -1,6 +1,6 @@
 {
   "name": "@chengfeng2025/findmcp",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "MCP服务，提供Smithery.ai网址查询功能",
   "main": "src/index.js",
   "type": "module",
