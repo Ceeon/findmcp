@@ -6,7 +6,7 @@ import { z } from 'zod';
 const server = new McpServer({
   name: "FindMCP",
   description: "提供MCP网址目录",
-  version: "1.0.0"
+  version: "1.0.2"
 });
 
 // 定义Smithery查询工具
@@ -14,14 +14,19 @@ server.tool(
   'smithery_search',
   {},
   async () => {
-    console.error('Smithery搜索工具被调用');
-    
-    return {
-      content: [{ 
-        type: "text", 
-        text: "Smithery.ai MCP服务目录：\nhttps://smithery.ai/\n\n您可以在此网站找到各种MCP服务，包括Sequential Thinking、Github、Brave Search等。" 
-      }]
-    };
+    try {
+      console.error('Smithery搜索工具被调用');
+      
+      return {
+        content: [{ 
+          type: "text", 
+          text: "Smithery.ai MCP服务目录：\nhttps://smithery.ai/\n\n您可以在此网站找到各种MCP服务，包括Sequential Thinking、Github、Brave Search等。" 
+        }]
+      };
+    } catch (error) {
+      console.error('Smithery搜索工具执行出错:', error);
+      throw error;
+    }
   }
 );
 
@@ -31,10 +36,12 @@ const transport = new StdioServerTransport();
 // 添加错误处理
 process.on('uncaughtException', (error) => {
   console.error('未捕获的异常:', error);
+  process.exit(1);
 });
 
 process.on('unhandledRejection', (reason) => {
   console.error('未处理的Promise拒绝:', reason);
+  process.exit(1);
 });
 
 // 连接服务器
