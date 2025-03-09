@@ -12,6 +12,3 @@ startCommand:
         env: {}
       };
     }
-
-command:
-  function: node src/websocket.js
