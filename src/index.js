@@ -8,7 +8,7 @@ import { z } from 'zod';
 const server = new McpServer({
   name: "FindMCP",
   description: "提供MCP网址目录",
-  version: "1.0.2"
+  version: "1.0.5"
 });
 
 // 定义Smithery查询工具
