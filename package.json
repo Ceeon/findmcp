@@ -34,7 +34,7 @@
     "url": "https://github.com/Ceeon/findmcp.git"
   },
   "bin": {
-    "findmcp": "./bin/findmcp.js"
+    "findmcp": "bin/findmcp.js"
   },
   "files": [
     "src/",
