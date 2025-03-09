@@ -195,6 +195,7 @@ FindMCP 是一个 MCP（Model Context Protocol）服务，专门用于提供 Smi
 - 🔌 与 Cursor 编辑器无缝集成
 - 🚀 支持 MCP 协议
 - 💡 简单易用的命令行界面
+- 🌐 支持 WebSocket 连接（可部署到 Smithery）
 
 ## 安装
 
@@ -211,6 +212,8 @@ npm install -g @chengfeng2025/findmcp
 
 ## 使用方法
 
+### 本地使用
+
 安装完成后，您可以直接在命令行中使用 `findmcp` 命令：
 
 ```bash
@@ -221,7 +224,50 @@ findmcp --help
 findmcp
 ```
 
+或者使用 npx 运行：
+
+```bash
+npx @chengfeng2025/findmcp
+```
+
 启动服务后，Cursor 编辑器将自动识别并连接到该服务，您可以在 Cursor 中使用 Smithery.ai 相关功能。
+
+### 在 Cursor 中配置
+
+1. 打开 Cursor 设置
+2. 找到 MCP Servers 部分
+3. 点击 "Add new MCP server"
+4. 填写配置：
+   - 名称：FindMCP
+   - 类型：command
+   - 命令：`npx @chengfeng2025/findmcp`
+
+### WebSocket 服务器
+
+本项目也支持 WebSocket 连接，可以部署到 Smithery 平台：
+
+```bash
+# 启动 WebSocket 服务器
+npm run start:ws
+
+# 开发模式启动 WebSocket 服务器
+npm run dev:ws
+```
+
+WebSocket 服务器默认监听 3000 端口，可以通过环境变量 PORT 修改。
+
+### 部署到 Smithery
+
+本项目已配置好 Smithery 部署所需的文件：
+
+1. `smithery.yaml` - Smithery 配置文件
+2. `Dockerfile` - Docker 构建文件
+
+部署步骤：
+
+1. 在 Smithery 上注册您的服务
+2. 连接您的 GitHub 仓库
+3. 点击部署按钮
 
 ## 开发
 
@@ -239,12 +285,16 @@ npm install
 
 # 启动开发服务
 npm run dev
+
+# 启动 WebSocket 开发服务
+npm run dev:ws
 ```
 
 ## 依赖项
 
 - [@modelcontextprotocol/sdk](https://www.npmjs.com/package/@modelcontextprotocol/sdk): MCP 协议 SDK
 - [zod](https://www.npmjs.com/package/zod): TypeScript 优先的模式声明和验证库
+- [ws](https://www.npmjs.com/package/ws): WebSocket 实现
 
 ## 许可证
 
@@ -262,6 +312,12 @@ npm run dev
 2. 提交 Pull Request
 
 ## 更新日志
+
+### 1.0.6
+
+- 🌐 添加 WebSocket 支持
+- 🚀 支持部署到 Smithery 平台
+- 📝 更新文档
 
 ### 1.0.0
 

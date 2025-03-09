@@ -11,5 +11,7 @@ RUN npm install
 # 复制源代码
 COPY . .
 
+EXPOSE 3000
+
 # 启动 MCP 服务器
-CMD ["node", "src/index.js"]
+CMD ["node", "src/websocket.js"]
