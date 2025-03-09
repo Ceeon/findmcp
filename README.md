@@ -184,3 +184,87 @@ LLM 应该会识别这些指令并调用相应的 MCP 工具。
 - **版本**: 1.0.0
 
 [![smithery badge](https://smithery.ai/badge/@Ceeon/find-a-mcp)](https://smithery.ai/server/@Ceeon/find-a-mcp)
+
+# FindMCP
+
+FindMCP 是一个 MCP（Model Context Protocol）服务，专门用于提供 Smithery.ai 网址查询功能。它是 Cursor 编辑器 AI 功能的扩展工具。
+
+## 功能特点
+
+- 🔍 快速查询 Smithery.ai 网址
+- 🔌 与 Cursor 编辑器无缝集成
+- 🚀 支持 MCP 协议
+- 💡 简单易用的命令行界面
+
+## 安装
+
+使用 npm 全局安装：
+
+```bash
+npm install -g @chengfeng2025/findmcp
+```
+
+## 系统要求
+
+- Node.js >= 16.0.0
+- npm >= 6.0.0
+
+## 使用方法
+
+安装完成后，您可以直接在命令行中使用 `findmcp` 命令：
+
+```bash
+# 查看帮助信息
+findmcp --help
+
+# 启动服务
+findmcp
+```
+
+启动服务后，Cursor 编辑器将自动识别并连接到该服务，您可以在 Cursor 中使用 Smithery.ai 相关功能。
+
+## 开发
+
+如果您想要参与开发，可以克隆仓库并安装依赖：
+
+```bash
+# 克隆仓库
+git clone https://github.com/Ceeon/findmcp.git
+
+# 进入项目目录
+cd findmcp
+
+# 安装依赖
+npm install
+
+# 启动开发服务
+npm run dev
+```
+
+## 依赖项
+
+- [@modelcontextprotocol/sdk](https://www.npmjs.com/package/@modelcontextprotocol/sdk): MCP 协议 SDK
+- [zod](https://www.npmjs.com/package/zod): TypeScript 优先的模式声明和验证库
+
+## 许可证
+
+本项目采用 MIT 许可证。详情请参见 [LICENSE](LICENSE) 文件。
+
+## 作者
+
+- Ceeon
+
+## 问题反馈
+
+如果您在使用过程中遇到任何问题，或有任何建议，欢迎：
+
+1. [提交 Issue](https://github.com/Ceeon/findmcp/issues)
+2. 提交 Pull Request
+
+## 更新日志
+
+### 1.0.0
+
+- 🎉 首次发布
+- ✨ 实现基本的 Smithery.ai 网址查询功能
+- 🔌 支持 MCP 协议集成
