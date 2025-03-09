@@ -15,6 +15,7 @@ class WebSocketServerTransport {
     this.ws.on('message', (message) => {
       try {
         const data = JSON.parse(message.toString());
+        console.error('收到消息:', JSON.stringify(data).substring(0, 100) + '...');
         if (this.onMessage) {
           this.onMessage(data);
         }
@@ -39,6 +40,7 @@ class WebSocketServerTransport {
     }
     
     try {
+      console.error('发送消息:', JSON.stringify(message).substring(0, 100) + '...');
       this.ws.send(JSON.stringify(message));
       return Promise.resolve();
     } catch (error) {
@@ -56,7 +58,19 @@ class WebSocketServerTransport {
 }
 
 // 创建 HTTP 服务器
-const httpServer = createServer();
+const httpServer = createServer((req, res) => {
+  // 添加健康检查端点
+  if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'ok' }));
+    return;
+  }
+  
+  res.writeHead(404);
+  res.end();
+});
+
+// 获取端口，优先使用环境变量
 const port = process.env.PORT || 3000;
 
 // 创建 WebSocket 服务器
@@ -66,7 +80,7 @@ const wss = new WebSocketServer({ server: httpServer });
 const server = new McpServer({
   name: "FindMCP",
   description: "提供MCP网址目录",
-  version: "1.0.7"
+  version: "1.0.8"
 });
 
 // 定义Smithery查询工具
@@ -93,17 +107,19 @@ server.tool(
 // 添加错误处理
 process.on('uncaughtException', (error) => {
   console.error('未捕获的异常:', error);
-  process.exit(1);
+  // 不要退出进程，让 Smithery 处理重启
+  // process.exit(1);
 });
 
 process.on('unhandledRejection', (reason) => {
   console.error('未处理的Promise拒绝:', reason);
-  process.exit(1);
+  // 不要退出进程，让 Smithery 处理重启
+  // process.exit(1);
 });
 
 // 处理 WebSocket 连接
-wss.on('connection', (ws) => {
-  console.error('新的 WebSocket 连接');
+wss.on('connection', (ws, req) => {
+  console.error('新的 WebSocket 连接，来自:', req.socket.remoteAddress);
   
   // 创建 WebSocket 传输层
   const transport = new WebSocketServerTransport(ws);
@@ -115,13 +131,17 @@ wss.on('connection', (ws) => {
     console.error('连接 WebSocket 客户端时发生错误:', error);
   });
   
-  ws.on('close', () => {
-    console.error('WebSocket 连接已关闭');
+  ws.on('error', (error) => {
+    console.error('WebSocket 错误:', error);
+  });
+  
+  ws.on('close', (code, reason) => {
+    console.error(`WebSocket 连接已关闭: ${code} ${reason}`);
   });
 });
 
 // 启动 HTTP 服务器
-httpServer.listen(port, () => {
+httpServer.listen(port, '0.0.0.0', () => {
   console.error(`WebSocket MCP 服务器已启动，监听端口 ${port}`);
   console.error('可用工具:');
   console.error(' - smithery_search: 返回Smithery.ai网址');
