@@ -1,10 +1,59 @@
 #!/usr/bin/env node
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { WebSocketServerTransport } from '@modelcontextprotocol/sdk/server/ws.js';
 import { z } from 'zod';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
+
+// 创建自定义 WebSocket 传输层
+class WebSocketServerTransport {
+  constructor(ws) {
+    this.ws = ws;
+    this.messageQueue = [];
+    this.isReady = false;
+    
+    this.ws.on('message', (message) => {
+      try {
+        const data = JSON.parse(message.toString());
+        if (this.onMessage) {
+          this.onMessage(data);
+        }
+      } catch (error) {
+        console.error('解析消息时出错:', error);
+      }
+    });
+    
+    this.isReady = true;
+    this.flushQueue();
+  }
+  
+  setMessageHandler(handler) {
+    this.onMessage = handler;
+    return Promise.resolve();
+  }
+  
+  sendMessage(message) {
+    if (!this.isReady) {
+      this.messageQueue.push(message);
+      return Promise.resolve();
+    }
+    
+    try {
+      this.ws.send(JSON.stringify(message));
+      return Promise.resolve();
+    } catch (error) {
+      console.error('发送消息时出错:', error);
+      return Promise.reject(error);
+    }
+  }
+  
+  flushQueue() {
+    while (this.messageQueue.length > 0) {
+      const message = this.messageQueue.shift();
+      this.sendMessage(message);
+    }
+  }
+}
 
 // 创建 HTTP 服务器
 const httpServer = createServer();
@@ -17,7 +66,7 @@ const wss = new WebSocketServer({ server: httpServer });
 const server = new McpServer({
   name: "FindMCP",
   description: "提供MCP网址目录",
-  version: "1.0.6"
+  version: "1.0.7"
 });
 
 // 定义Smithery查询工具
